@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Sprint.Rr.Bll.Interfaces", "Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces.csproj", "{F4003A25-5DBB-43A6-9DB9-48C77704C88C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toci.Sprint.Rr.Bll", "Toci.Sprint.Rr.Bll\Toci.Sprint.Rr.Bll.csproj", "{D5764E93-0A19-44AA-B150-FC118B3B7DF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4003A25-5DBB-43A6-9DB9-48C77704C88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4003A25-5DBB-43A6-9DB9-48C77704C88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4003A25-5DBB-43A6-9DB9-48C77704C88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4003A25-5DBB-43A6-9DB9-48C77704C88C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5764E93-0A19-44AA-B150-FC118B3B7DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5764E93-0A19-44AA-B150-FC118B3B7DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5764E93-0A19-44AA-B150-FC118B3B7DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5764E93-0A19-44AA-B150-FC118B3B7DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {126EA9C4-4ADB-414A-980F-4B4B00192C99}
+	EndGlobalSection
+EndGlobal

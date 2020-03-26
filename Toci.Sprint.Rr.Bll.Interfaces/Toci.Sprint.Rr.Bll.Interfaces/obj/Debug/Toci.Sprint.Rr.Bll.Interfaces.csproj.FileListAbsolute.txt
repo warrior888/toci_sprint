@@ -1,0 +1,6 @@
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\bin\Debug\Toci.Sprint.Rr.Bll.Interfaces.dll
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\bin\Debug\Toci.Sprint.Rr.Bll.Interfaces.pdb
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\obj\Debug\Toci.Sprint.Rr.Bll.Interfaces.csprojAssemblyReference.cache
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\obj\Debug\Toci.Sprint.Rr.Bll.Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\obj\Debug\Toci.Sprint.Rr.Bll.Interfaces.dll
+C:\Users\bzapa\source\repos\toci_sprint\Toci.Sprint.Rr.Bll.Interfaces\Toci.Sprint.Rr.Bll.Interfaces\obj\Debug\Toci.Sprint.Rr.Bll.Interfaces.pdb
