@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="voteModelStoreContainer" CdmEntityContainer="voteEntities">
+    <EntitySetMapping Name="Candidates">
+      <EntityTypeMapping TypeName="voteModel.Candidate">
+        <MappingFragment StoreEntitySet="Candidates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VotesForCandidates">
+      <EntityTypeMapping TypeName="voteModel.VotesForCandidate">
+        <MappingFragment StoreEntitySet="VotesForCandidates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdVoteUsers" ColumnName="IdVoteUsers" />
+          <ScalarProperty Name="IdCandidates" ColumnName="IdCandidates" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoteUsers">
+      <EntityTypeMapping TypeName="voteModel.VoteUser">
+        <MappingFragment StoreEntitySet="VoteUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

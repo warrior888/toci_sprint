@@ -31,3 +31,4 @@
 *.out
 *.app
 /Toci.Sprint.Rr.Bll.Interfaces/.vs/Toci.Sprint.Rr.Bll.Interfaces/v15/Server/sqlite3
+/Toci.Sprint.Vote.Dal.Interfaces/.vs/Toci.Sprint.Vote.Dal.Interfaces/v15/Server/sqlite3

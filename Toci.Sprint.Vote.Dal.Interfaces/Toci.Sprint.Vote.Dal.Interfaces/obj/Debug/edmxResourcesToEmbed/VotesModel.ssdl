@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="voteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Candidates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VotesForCandidates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdVoteUsers" Type="int" />
+    <Property Name="IdCandidates" Type="int" />
+  </EntityType>
+  <EntityType Name="VoteUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__VotesForC__IdCan__30F848ED">
+    <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
+    <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VotesForCandidates">
+        <PropertyRef Name="IdCandidates" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VotesForC__IdVot__300424B4">
+    <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
+    <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VoteUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VotesForCandidates">
+        <PropertyRef Name="IdVoteUsers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="voteModelStoreContainer">
+    <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VoteUsers" EntityType="Self.VoteUsers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__VotesForC__IdCan__30F848ED" Association="Self.FK__VotesForC__IdCan__30F848ED">
+      <End Role="Candidates" EntitySet="Candidates" />
+      <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VotesForC__IdVot__300424B4" Association="Self.FK__VotesForC__IdVot__300424B4">
+      <End Role="VoteUsers" EntitySet="VoteUsers" />
+      <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

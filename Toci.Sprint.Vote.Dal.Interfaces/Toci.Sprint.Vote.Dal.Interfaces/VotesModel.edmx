@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="voteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotesForCandidates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVoteUsers" Type="int" />
+          <Property Name="IdCandidates" Type="int" />
+        </EntityType>
+        <EntityType Name="VoteUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__VotesForC__IdCan__30F848ED">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotesForC__IdVot__300424B4">
+          <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdVoteUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="voteModelStoreContainer">
+          <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoteUsers" EntityType="Self.VoteUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__VotesForC__IdCan__30F848ED" Association="Self.FK__VotesForC__IdCan__30F848ED">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotesForC__IdVot__300424B4" Association="Self.FK__VotesForC__IdVot__300424B4">
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="voteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdCan__30F848ED" FromRole="Candidates" ToRole="VotesForCandidates" />
+        </EntityType>
+        <EntityType Name="VotesForCandidate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVoteUsers" Type="Int32" />
+          <Property Name="IdCandidates" Type="Int32" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK__VotesForC__IdCan__30F848ED" FromRole="VotesForCandidates" ToRole="Candidates" />
+          <NavigationProperty Name="VoteUser" Relationship="Self.FK__VotesForC__IdVot__300424B4" FromRole="VotesForCandidates" ToRole="VoteUsers" />
+        </EntityType>
+        <EntityType Name="VoteUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdVot__300424B4" FromRole="VoteUsers" ToRole="VotesForCandidates" />
+        </EntityType>
+        <Association Name="FK__VotesForC__IdCan__30F848ED">
+          <End Role="Candidates" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotesForC__IdVot__300424B4">
+          <End Role="VoteUsers" Type="Self.VoteUser" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdVoteUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="voteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+          <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidate" />
+          <EntitySet Name="VoteUsers" EntityType="Self.VoteUser" />
+          <AssociationSet Name="FK__VotesForC__IdCan__30F848ED" Association="Self.FK__VotesForC__IdCan__30F848ED">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotesForC__IdVot__300424B4" Association="Self.FK__VotesForC__IdVot__300424B4">
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="voteModelStoreContainer" CdmEntityContainer="voteEntities">
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="voteModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VotesForCandidates">
+            <EntityTypeMapping TypeName="voteModel.VotesForCandidate">
+              <MappingFragment StoreEntitySet="VotesForCandidates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdVoteUsers" ColumnName="IdVoteUsers" />
+                <ScalarProperty Name="IdCandidates" ColumnName="IdCandidates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoteUsers">
+            <EntityTypeMapping TypeName="voteModel.VoteUser">
+              <MappingFragment StoreEntitySet="VoteUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
