@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2671dfc1c28c4c40b283d9e74bfce36e" Name="Diagram1">
+        <EntityTypeShape EntityType="voteModel.Candidate" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.ElectionKind" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.Language" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.Phras" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.Translation" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.VotesForCandidate" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.VoteUser" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="voteModel.FK__VotesForC__IdCan__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="voteModel.FK__Translati__IdLan__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="voteModel.FK__VoteUsers__IdLan__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="voteModel.FK__Translati__IdPhr__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="voteModel.FK__VotesForC__IdVot__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

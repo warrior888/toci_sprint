@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Toci.Sprint.Vote.Dal.Interfaces
+namespace Toci.Sprint.Vote.Dal.Pyrenees
 {
     using System;
     using System.Data.Entity;
@@ -26,15 +26,12 @@ namespace Toci.Sprint.Vote.Dal.Interfaces
         }
     
         public virtual DbSet<Candidate> Candidates { get; set; }
-        public virtual DbSet<VotesForCandidate> VotesForCandidates { get; set; }
-        public virtual DbSet<VoteUser> VoteUsers { get; set; }
         public virtual DbSet<ElectionKind> ElectionKinds { get; set; }
-        public virtual DbSet<FriendVote> FriendVotes { get; set; }
-        public virtual DbSet<GeographicRegion> GeographicRegions { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<Phras> Phrases { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
+        public virtual DbSet<VotesForCandidate> VotesForCandidates { get; set; }
+        public virtual DbSet<VoteUser> VoteUsers { get; set; }
     }
 }

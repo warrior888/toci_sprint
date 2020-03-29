@@ -6,6 +6,70 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="ElectionKind">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ElectionKind" Type="text" />
+  </EntityType>
+  <EntityType Name="FriendVotes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdFriendsVotes" Type="int" />
+  </EntityType>
+  <EntityType Name="GeographicRegions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGeographicRegions" Type="int" />
+    <Property Name="Name" Type="text" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="text" />
+    <Property Name="Currency" Type="text" />
+  </EntityType>
+  <EntityType Name="Occupations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOccupations" Type="int" />
+    <Property Name="Name" Type="text" />
+  </EntityType>
+  <EntityType Name="Phrases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Phrase" Type="text" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Translations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdLanguages" Type="bigint" />
+    <Property Name="IdPhrases" Type="bigint" />
+    <Property Name="Translation" Type="text" />
+  </EntityType>
   <EntityType Name="VotesForCandidates">
     <Key>
       <PropertyRef Name="Id" />
@@ -19,8 +83,82 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComesFrom" Type="int" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Name" Type="text" />
+    <Property Name="Surname" Type="text" />
+    <Property Name="Email" Type="text" />
+    <Property Name="Phone" Type="text" />
+    <Property Name="Password" Type="text" />
+    <Property Name="EmailVerified" Type="int" />
+    <Property Name="City" Type="text" />
+    <Property Name="PostCode" Type="text" />
+    <Property Name="Street" Type="text" />
+    <Property Name="IdLanguages" Type="bigint" />
+    <Property Name="IdOccupations" Type="int" />
+    <Property Name="IdGeographicRegions" Type="int" />
   </EntityType>
-  <Association Name="FK__VotesForC__IdCan__30F848ED">
+  <Association Name="FK__FriendVot__IdFri__05D8E0BE">
+    <End Role="FriendVotes" Type="Self.FriendVotes" Multiplicity="0..1" />
+    <End Role="FriendVotes1" Type="Self.FriendVotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FriendVotes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FriendVotes1">
+        <PropertyRef Name="IdFriendsVotes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Geographi__IdGeo__6C190EBB">
+    <End Role="GeographicRegions" Type="Self.GeographicRegions" Multiplicity="0..1" />
+    <End Role="GeographicRegions1" Type="Self.GeographicRegions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeographicRegions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeographicRegions1">
+        <PropertyRef Name="IdGeographicRegions" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Occupatio__IdOcc__6EF57B66">
+    <End Role="Occupations" Type="Self.Occupations" Multiplicity="0..1" />
+    <End Role="Occupations1" Type="Self.Occupations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occupations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Occupations1">
+        <PropertyRef Name="IdOccupations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Translati__IdLan__75A278F5">
+    <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+    <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Translations">
+        <PropertyRef Name="IdLanguages" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Translati__IdPhr__76969D2E">
+    <End Role="Phrases" Type="Self.Phrases" Multiplicity="0..1" />
+    <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phrases">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Translations">
+        <PropertyRef Name="IdPhrases" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VotesForC__IdCan__02FC7413">
     <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
     <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
     <ReferentialConstraint>
@@ -32,7 +170,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VotesForC__IdVot__300424B4">
+  <Association Name="FK__VotesForC__IdVot__02084FDA">
     <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
     <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
     <ReferentialConstraint>
@@ -44,17 +182,93 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__VoteUsers__IdGeo__7B5B524B">
+    <End Role="GeographicRegions" Type="Self.GeographicRegions" Multiplicity="0..1" />
+    <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeographicRegions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUsers">
+        <PropertyRef Name="IdGeographicRegions" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoteUsers__IdLan__797309D9">
+    <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+    <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUsers">
+        <PropertyRef Name="IdLanguages" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoteUsers__IdOcc__7A672E12">
+    <End Role="Occupations" Type="Self.Occupations" Multiplicity="0..1" />
+    <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occupations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUsers">
+        <PropertyRef Name="IdOccupations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="voteModelStoreContainer">
     <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ElectionKind" EntityType="Self.ElectionKind" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FriendVotes" EntityType="Self.FriendVotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GeographicRegions" EntityType="Self.GeographicRegions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Occupations" EntityType="Self.Occupations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phrases" EntityType="Self.Phrases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Translations" EntityType="Self.Translations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VoteUsers" EntityType="Self.VoteUsers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__VotesForC__IdCan__30F848ED" Association="Self.FK__VotesForC__IdCan__30F848ED">
+    <AssociationSet Name="FK__FriendVot__IdFri__05D8E0BE" Association="Self.FK__FriendVot__IdFri__05D8E0BE">
+      <End Role="FriendVotes" EntitySet="FriendVotes" />
+      <End Role="FriendVotes1" EntitySet="FriendVotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Geographi__IdGeo__6C190EBB" Association="Self.FK__Geographi__IdGeo__6C190EBB">
+      <End Role="GeographicRegions" EntitySet="GeographicRegions" />
+      <End Role="GeographicRegions1" EntitySet="GeographicRegions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Occupatio__IdOcc__6EF57B66" Association="Self.FK__Occupatio__IdOcc__6EF57B66">
+      <End Role="Occupations" EntitySet="Occupations" />
+      <End Role="Occupations1" EntitySet="Occupations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Translati__IdLan__75A278F5" Association="Self.FK__Translati__IdLan__75A278F5">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Translations" EntitySet="Translations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Translati__IdPhr__76969D2E" Association="Self.FK__Translati__IdPhr__76969D2E">
+      <End Role="Phrases" EntitySet="Phrases" />
+      <End Role="Translations" EntitySet="Translations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VotesForC__IdCan__02FC7413" Association="Self.FK__VotesForC__IdCan__02FC7413">
       <End Role="Candidates" EntitySet="Candidates" />
       <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
     </AssociationSet>
-    <AssociationSet Name="FK__VotesForC__IdVot__300424B4" Association="Self.FK__VotesForC__IdVot__300424B4">
+    <AssociationSet Name="FK__VotesForC__IdVot__02084FDA" Association="Self.FK__VotesForC__IdVot__02084FDA">
       <End Role="VoteUsers" EntitySet="VoteUsers" />
       <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdGeo__7B5B524B" Association="Self.FK__VoteUsers__IdGeo__7B5B524B">
+      <End Role="GeographicRegions" EntitySet="GeographicRegions" />
+      <End Role="VoteUsers" EntitySet="VoteUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdLan__797309D9" Association="Self.FK__VoteUsers__IdLan__797309D9">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="VoteUsers" EntitySet="VoteUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdOcc__7A672E12" Association="Self.FK__VoteUsers__IdOcc__7A672E12">
+      <End Role="Occupations" EntitySet="Occupations" />
+      <End Role="VoteUsers" EntitySet="VoteUsers" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

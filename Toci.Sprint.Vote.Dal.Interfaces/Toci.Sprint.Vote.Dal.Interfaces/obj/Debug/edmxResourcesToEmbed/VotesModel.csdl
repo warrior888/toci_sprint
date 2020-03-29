@@ -23,6 +23,23 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdVot__300424B4" FromRole="VoteUsers" ToRole="VotesForCandidates" />
+    <Property Name="ComesFrom" Type="Int32" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="EmailVerified" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IdLanguages" Type="Int64" />
+    <Property Name="IdOccupations" Type="Int32" />
+    <Property Name="IdGeographicRegions" Type="Int32" />
+    <NavigationProperty Name="GeographicRegion" Relationship="voteModel.FK__VoteUsers__IdGeo__7B5B524B" FromRole="VoteUser" ToRole="GeographicRegion" />
+    <NavigationProperty Name="Language" Relationship="voteModel.FK__VoteUsers__IdLan__797309D9" FromRole="VoteUser" ToRole="Language" />
+    <NavigationProperty Name="Occupation" Relationship="voteModel.FK__VoteUsers__IdOcc__7A672E12" FromRole="VoteUser" ToRole="Occupation" />
   </EntityType>
   <Association Name="FK__VotesForC__IdCan__30F848ED">
     <End Role="Candidates" Type="Self.Candidate" Multiplicity="0..1" />
@@ -60,5 +77,218 @@
       <End Role="VoteUsers" EntitySet="VoteUsers" />
       <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
     </AssociationSet>
+    <EntitySet Name="ElectionKinds" EntityType="voteModel.ElectionKind" />
+    <EntitySet Name="FriendVotes" EntityType="voteModel.FriendVote" />
+    <EntitySet Name="GeographicRegions" EntityType="voteModel.GeographicRegion" />
+    <EntitySet Name="Languages" EntityType="voteModel.Language" />
+    <EntitySet Name="Occupations" EntityType="voteModel.Occupation" />
+    <EntitySet Name="Phrases" EntityType="voteModel.Phras" />
+    <EntitySet Name="sysdiagrams" EntityType="voteModel.sysdiagram" />
+    <EntitySet Name="Translations" EntityType="voteModel.Translation" />
+    <AssociationSet Name="FK__FriendVot__IdFri__05D8E0BE" Association="voteModel.FK__FriendVot__IdFri__05D8E0BE">
+      <End Role="FriendVote" EntitySet="FriendVotes" />
+      <End Role="FriendVote1" EntitySet="FriendVotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Geographi__IdGeo__6C190EBB" Association="voteModel.FK__Geographi__IdGeo__6C190EBB">
+      <End Role="GeographicRegion" EntitySet="GeographicRegions" />
+      <End Role="GeographicRegion1" EntitySet="GeographicRegions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdGeo__7B5B524B" Association="voteModel.FK__VoteUsers__IdGeo__7B5B524B">
+      <End Role="GeographicRegion" EntitySet="GeographicRegions" />
+      <End Role="VoteUser" EntitySet="VoteUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Translati__IdLan__75A278F5" Association="voteModel.FK__Translati__IdLan__75A278F5">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Translation" EntitySet="Translations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdLan__797309D9" Association="voteModel.FK__VoteUsers__IdLan__797309D9">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="VoteUser" EntitySet="VoteUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Occupatio__IdOcc__6EF57B66" Association="voteModel.FK__Occupatio__IdOcc__6EF57B66">
+      <End Role="Occupation" EntitySet="Occupations" />
+      <End Role="Occupation1" EntitySet="Occupations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VoteUsers__IdOcc__7A672E12" Association="voteModel.FK__VoteUsers__IdOcc__7A672E12">
+      <End Role="Occupation" EntitySet="Occupations" />
+      <End Role="VoteUser" EntitySet="VoteUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Translati__IdPhr__76969D2E" Association="voteModel.FK__Translati__IdPhr__76969D2E">
+      <End Role="Phras" EntitySet="Phrases" />
+      <End Role="Translation" EntitySet="Translations" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ElectionKind">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ElectionKind1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FriendVote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFriendsVotes" Type="Int32" />
+    <NavigationProperty Name="FriendVotes1" Relationship="voteModel.FK__FriendVot__IdFri__05D8E0BE" FromRole="FriendVote" ToRole="FriendVote1" />
+    <NavigationProperty Name="FriendVote1" Relationship="voteModel.FK__FriendVot__IdFri__05D8E0BE" FromRole="FriendVote1" ToRole="FriendVote" />
+  </EntityType>
+  <EntityType Name="GeographicRegion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGeographicRegions" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GeographicRegions1" Relationship="voteModel.FK__Geographi__IdGeo__6C190EBB" FromRole="GeographicRegion" ToRole="GeographicRegion1" />
+    <NavigationProperty Name="GeographicRegion1" Relationship="voteModel.FK__Geographi__IdGeo__6C190EBB" FromRole="GeographicRegion1" ToRole="GeographicRegion" />
+    <NavigationProperty Name="VoteUsers" Relationship="voteModel.FK__VoteUsers__IdGeo__7B5B524B" FromRole="GeographicRegion" ToRole="VoteUser" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Translations" Relationship="voteModel.FK__Translati__IdLan__75A278F5" FromRole="Language" ToRole="Translation" />
+    <NavigationProperty Name="VoteUsers" Relationship="voteModel.FK__VoteUsers__IdLan__797309D9" FromRole="Language" ToRole="VoteUser" />
+  </EntityType>
+  <EntityType Name="Occupation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOccupations" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Occupations1" Relationship="voteModel.FK__Occupatio__IdOcc__6EF57B66" FromRole="Occupation" ToRole="Occupation1" />
+    <NavigationProperty Name="Occupation1" Relationship="voteModel.FK__Occupatio__IdOcc__6EF57B66" FromRole="Occupation1" ToRole="Occupation" />
+    <NavigationProperty Name="VoteUsers" Relationship="voteModel.FK__VoteUsers__IdOcc__7A672E12" FromRole="Occupation" ToRole="VoteUser" />
+  </EntityType>
+  <EntityType Name="Phras">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Phrase" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Translations" Relationship="voteModel.FK__Translati__IdPhr__76969D2E" FromRole="Phras" ToRole="Translation" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Translation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLanguages" Type="Int64" />
+    <Property Name="IdPhrases" Type="Int64" />
+    <Property Name="Translation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Language" Relationship="voteModel.FK__Translati__IdLan__75A278F5" FromRole="Translation" ToRole="Language" />
+    <NavigationProperty Name="Phras" Relationship="voteModel.FK__Translati__IdPhr__76969D2E" FromRole="Translation" ToRole="Phras" />
+  </EntityType>
+  <Association Name="FK__FriendVot__IdFri__05D8E0BE">
+    <End Type="voteModel.FriendVote" Role="FriendVote" Multiplicity="0..1" />
+    <End Type="voteModel.FriendVote" Role="FriendVote1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FriendVote">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FriendVote1">
+        <PropertyRef Name="IdFriendsVotes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Geographi__IdGeo__6C190EBB">
+    <End Type="voteModel.GeographicRegion" Role="GeographicRegion" Multiplicity="0..1" />
+    <End Type="voteModel.GeographicRegion" Role="GeographicRegion1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeographicRegion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeographicRegion1">
+        <PropertyRef Name="IdGeographicRegions" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoteUsers__IdGeo__7B5B524B">
+    <End Type="voteModel.GeographicRegion" Role="GeographicRegion" Multiplicity="0..1" />
+    <End Type="voteModel.VoteUser" Role="VoteUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeographicRegion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUser">
+        <PropertyRef Name="IdGeographicRegions" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Translati__IdLan__75A278F5">
+    <End Type="voteModel.Language" Role="Language" Multiplicity="0..1" />
+    <End Type="voteModel.Translation" Role="Translation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Translation">
+        <PropertyRef Name="IdLanguages" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoteUsers__IdLan__797309D9">
+    <End Type="voteModel.Language" Role="Language" Multiplicity="0..1" />
+    <End Type="voteModel.VoteUser" Role="VoteUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUser">
+        <PropertyRef Name="IdLanguages" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Occupatio__IdOcc__6EF57B66">
+    <End Type="voteModel.Occupation" Role="Occupation" Multiplicity="0..1" />
+    <End Type="voteModel.Occupation" Role="Occupation1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occupation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Occupation1">
+        <PropertyRef Name="IdOccupations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VoteUsers__IdOcc__7A672E12">
+    <End Type="voteModel.Occupation" Role="Occupation" Multiplicity="0..1" />
+    <End Type="voteModel.VoteUser" Role="VoteUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occupation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VoteUser">
+        <PropertyRef Name="IdOccupations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Translati__IdPhr__76969D2E">
+    <End Type="voteModel.Phras" Role="Phras" Multiplicity="0..1" />
+    <End Type="voteModel.Translation" Role="Translation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phras">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Translation">
+        <PropertyRef Name="IdPhrases" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

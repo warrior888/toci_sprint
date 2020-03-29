@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="voteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ElectionKind">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElectionKind" Type="text" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" />
+          <Property Name="Currency" Type="text" />
+        </EntityType>
+        <EntityType Name="Phrases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phrase" Type="text" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Translations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLanguages" Type="bigint" />
+          <Property Name="IdPhrases" Type="bigint" />
+          <Property Name="Translation" Type="text" />
+        </EntityType>
+        <EntityType Name="VotesForCandidates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVoteUsers" Type="int" />
+          <Property Name="IdCandidates" Type="int" />
+        </EntityType>
+        <EntityType Name="VoteUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComesFrom" Type="int" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Name" Type="text" />
+          <Property Name="Surname" Type="text" />
+          <Property Name="Email" Type="text" />
+          <Property Name="Phone" Type="text" />
+          <Property Name="Password" Type="text" />
+          <Property Name="EmailVerified" Type="int" />
+          <Property Name="City" Type="text" />
+          <Property Name="PostCode" Type="text" />
+          <Property Name="Street" Type="text" />
+          <Property Name="IdLanguages" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__Translati__IdLan__52593CB8">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translations">
+              <PropertyRef Name="IdLanguages" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Translati__IdPhr__534D60F1">
+          <End Role="Phrases" Type="Self.Phrases" Multiplicity="0..1" />
+          <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phrases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translations">
+              <PropertyRef Name="IdPhrases" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotesForC__IdCan__5DCAEF64">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotesForC__IdVot__5CD6CB2B">
+          <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdVoteUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteUsers__IdLan__5629CD9C">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VoteUsers">
+              <PropertyRef Name="IdLanguages" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="voteModelStoreContainer">
+          <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ElectionKind" EntityType="Self.ElectionKind" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phrases" EntityType="Self.Phrases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translations" EntityType="Self.Translations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoteUsers" EntityType="Self.VoteUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Translati__IdLan__52593CB8" Association="Self.FK__Translati__IdLan__52593CB8">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="Translations" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Translati__IdPhr__534D60F1" Association="Self.FK__Translati__IdPhr__534D60F1">
+            <End Role="Phrases" EntitySet="Phrases" />
+            <End Role="Translations" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotesForC__IdCan__5DCAEF64" Association="Self.FK__VotesForC__IdCan__5DCAEF64">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotesForC__IdVot__5CD6CB2B" Association="Self.FK__VotesForC__IdVot__5CD6CB2B">
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteUsers__IdLan__5629CD9C" Association="Self.FK__VoteUsers__IdLan__5629CD9C">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="voteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdCan__5DCAEF64" FromRole="Candidates" ToRole="VotesForCandidates" />
+        </EntityType>
+        <EntityType Name="ElectionKind">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElectionKind1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Translations" Relationship="Self.FK__Translati__IdLan__52593CB8" FromRole="Languages" ToRole="Translations" />
+          <NavigationProperty Name="VoteUsers" Relationship="Self.FK__VoteUsers__IdLan__5629CD9C" FromRole="Languages" ToRole="VoteUsers" />
+        </EntityType>
+        <EntityType Name="Phras">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phrase" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Translations" Relationship="Self.FK__Translati__IdPhr__534D60F1" FromRole="Phrases" ToRole="Translations" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLanguages" Type="Int64" />
+          <Property Name="IdPhrases" Type="Int64" />
+          <Property Name="Translation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Language" Relationship="Self.FK__Translati__IdLan__52593CB8" FromRole="Translations" ToRole="Languages" />
+          <NavigationProperty Name="Phras" Relationship="Self.FK__Translati__IdPhr__534D60F1" FromRole="Translations" ToRole="Phrases" />
+        </EntityType>
+        <EntityType Name="VotesForCandidate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVoteUsers" Type="Int32" />
+          <Property Name="IdCandidates" Type="Int32" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK__VotesForC__IdCan__5DCAEF64" FromRole="VotesForCandidates" ToRole="Candidates" />
+          <NavigationProperty Name="VoteUser" Relationship="Self.FK__VotesForC__IdVot__5CD6CB2B" FromRole="VotesForCandidates" ToRole="VoteUsers" />
+        </EntityType>
+        <EntityType Name="VoteUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComesFrom" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmailVerified" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdLanguages" Type="Int64" />
+          <NavigationProperty Name="Language" Relationship="Self.FK__VoteUsers__IdLan__5629CD9C" FromRole="VoteUsers" ToRole="Languages" />
+          <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdVot__5CD6CB2B" FromRole="VoteUsers" ToRole="VotesForCandidates" />
+        </EntityType>
+        <Association Name="FK__VotesForC__IdCan__5DCAEF64">
+          <End Role="Candidates" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Translati__IdLan__52593CB8">
+          <End Role="Languages" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="Translations" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translations">
+              <PropertyRef Name="IdLanguages" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteUsers__IdLan__5629CD9C">
+          <End Role="Languages" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="VoteUsers" Type="Self.VoteUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VoteUsers">
+              <PropertyRef Name="IdLanguages" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Translati__IdPhr__534D60F1">
+          <End Role="Phrases" Type="Self.Phras" Multiplicity="0..1" />
+          <End Role="Translations" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phrases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translations">
+              <PropertyRef Name="IdPhrases" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotesForC__IdVot__5CD6CB2B">
+          <End Role="VoteUsers" Type="Self.VoteUser" Multiplicity="0..1" />
+          <End Role="VotesForCandidates" Type="Self.VotesForCandidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotesForCandidates">
+              <PropertyRef Name="IdVoteUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="voteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+          <EntitySet Name="ElectionKinds" EntityType="Self.ElectionKind" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Phrases" EntityType="Self.Phras" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Translations" EntityType="Self.Translation" />
+          <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidate" />
+          <EntitySet Name="VoteUsers" EntityType="Self.VoteUser" />
+          <AssociationSet Name="FK__VotesForC__IdCan__5DCAEF64" Association="Self.FK__VotesForC__IdCan__5DCAEF64">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Translati__IdLan__52593CB8" Association="Self.FK__Translati__IdLan__52593CB8">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="Translations" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteUsers__IdLan__5629CD9C" Association="Self.FK__VoteUsers__IdLan__5629CD9C">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Translati__IdPhr__534D60F1" Association="Self.FK__Translati__IdPhr__534D60F1">
+            <End Role="Phrases" EntitySet="Phrases" />
+            <End Role="Translations" EntitySet="Translations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotesForC__IdVot__5CD6CB2B" Association="Self.FK__VotesForC__IdVot__5CD6CB2B">
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+            <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="voteModelStoreContainer" CdmEntityContainer="voteEntities">
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="voteModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ElectionKinds">
+            <EntityTypeMapping TypeName="voteModel.ElectionKind">
+              <MappingFragment StoreEntitySet="ElectionKind">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ElectionKind1" ColumnName="ElectionKind" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="voteModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phrases">
+            <EntityTypeMapping TypeName="voteModel.Phras">
+              <MappingFragment StoreEntitySet="Phrases">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Phrase" ColumnName="Phrase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="voteModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Translations">
+            <EntityTypeMapping TypeName="voteModel.Translation">
+              <MappingFragment StoreEntitySet="Translations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLanguages" ColumnName="IdLanguages" />
+                <ScalarProperty Name="IdPhrases" ColumnName="IdPhrases" />
+                <ScalarProperty Name="Translation1" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VotesForCandidates">
+            <EntityTypeMapping TypeName="voteModel.VotesForCandidate">
+              <MappingFragment StoreEntitySet="VotesForCandidates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdVoteUsers" ColumnName="IdVoteUsers" />
+                <ScalarProperty Name="IdCandidates" ColumnName="IdCandidates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoteUsers">
+            <EntityTypeMapping TypeName="voteModel.VoteUser">
+              <MappingFragment StoreEntitySet="VoteUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ComesFrom" ColumnName="ComesFrom" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailVerified" ColumnName="EmailVerified" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="IdLanguages" ColumnName="IdLanguages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

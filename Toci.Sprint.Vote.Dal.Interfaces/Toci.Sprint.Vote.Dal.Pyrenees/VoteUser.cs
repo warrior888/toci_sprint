@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Toci.Sprint.Vote.Dal.Interfaces
+namespace Toci.Sprint.Vote.Dal.Pyrenees
 {
     using System;
     using System.Collections.Generic;
@@ -33,13 +33,9 @@ namespace Toci.Sprint.Vote.Dal.Interfaces
         public string PostCode { get; set; }
         public string Street { get; set; }
         public Nullable<long> IdLanguages { get; set; }
-        public Nullable<int> IdOccupations { get; set; }
-        public Nullable<int> IdGeographicRegions { get; set; }
     
+        public virtual Language Language { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VotesForCandidate> VotesForCandidates { get; set; }
-        public virtual GeographicRegion GeographicRegion { get; set; }
-        public virtual Language Language { get; set; }
-        public virtual Occupation Occupation { get; set; }
     }
 }
