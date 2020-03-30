@@ -1,4 +1,5 @@
 drop table VotesForCandidates;
+drop table FriendVotes;
 drop table Candidates;
 drop table ElectionKind;
 drop table VoteUsers;
@@ -7,6 +8,20 @@ drop table Phrases;
 drop table Languages;
 drop table Occupations;
 drop table GeographicRegions;
+
+create table GeographicRegions
+(
+	Id integer identity primary key,
+	IdGeographicRegions integer references GeographicRegions(Id),
+	Name text
+);
+
+create table Occupations
+(
+	Id integer identity primary key,
+	IdOccupations integer references Occupations(Id),
+	Name text
+);
 
 create table Languages
 (
@@ -77,19 +92,24 @@ create table VotesForCandidates
 create table FriendVotes
 (
 	Id integer identity primary key,
-	IdFriendsVotes integer references FriendVotes(Id),
+	IdVoteUsers integer references FriendVotes(Id),
+	IdVoteUsersFriend integer references VoteUsers(Id),
+	IdCandidates int references Candidates(Id),
+	AllowedToShow bit 
 );
 
-create table GeographicRegions
+
+
+
+create table TreeOfPeople
 (
 	Id integer identity primary key,
-	IdGeographicRegions integer references GeographicRegions(Id),
+	IdTreeOfPeople integer references TreeOfPeople(Id),
 	Name text
 );
 
-create table Occupations
-(
-	Id integer identity primary key,
-	IdOccupations integer references Occupations(Id),
-	Name text
-);
+insert into TreeOfPeople (name) values ('Pradziadek');
+insert into TreeOfPeople (IdTreeOfPeople, name) values (1, 'Dziadek');
+insert into TreeOfPeople (IdTreeOfPeople, name) values (2, 'Ojciec');
+
+select * from TreeOfPeople;

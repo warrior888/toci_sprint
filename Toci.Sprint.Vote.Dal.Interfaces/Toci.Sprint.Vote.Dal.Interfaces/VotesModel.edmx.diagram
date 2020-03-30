@@ -6,14 +6,14 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e281c7d009b24b17af0bfc1f88cb472e" Name="Diagram1">
         <EntityTypeShape EntityType="voteModel.Candidate" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="voteModel.VotesForCandidate" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="voteModel.VoteUser" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.VotesForCandidate" Width="2.5" PointX="3.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="voteModel.VoteUser" Width="2.125" PointX="0.5" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="voteModel.FK__VotesForC__IdCan__30F848ED" ManuallyRouted="false" />
         <AssociationConnector Association="voteModel.FK__VotesForC__IdVot__300424B4" ManuallyRouted="false" />
         <EntityTypeShape EntityType="voteModel.ElectionKind" Width="1.5" PointX="8.625" PointY="3.75" />
         <EntityTypeShape EntityType="voteModel.FriendVote" Width="1.5" PointX="7.625" PointY="0.75" />
-        <EntityTypeShape EntityType="voteModel.GeographicRegion" Width="1.5" PointX="3" PointY="12.75" />
-        <EntityTypeShape EntityType="voteModel.Language" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="voteModel.GeographicRegion" Width="1.875" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="voteModel.Language" Width="1.5" PointX="3.875" PointY="5.375" />
         <EntityTypeShape EntityType="voteModel.Occupation" Width="1.5" PointX="3" PointY="9.75" />
         <EntityTypeShape EntityType="voteModel.Phras" Width="1.5" PointX="3.75" PointY="15.75" />
         <EntityTypeShape EntityType="voteModel.sysdiagram" Width="1.5" PointX="8.625" PointY="6.75" />
@@ -26,6 +26,9 @@
         <AssociationConnector Association="voteModel.FK__Occupatio__IdOcc__6EF57B66" />
         <AssociationConnector Association="voteModel.FK__VoteUsers__IdOcc__7A672E12" />
         <AssociationConnector Association="voteModel.FK__Translati__IdPhr__76969D2E" />
+        <AssociationConnector Association="voteModel.FK__FriendVot__IdCan__681373AD" />
+        <AssociationConnector Association="voteModel.FK__FriendVot__IdVot__662B2B3B" />
+        <AssociationConnector Association="voteModel.FK__FriendVot__IdVot__671F4F74" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

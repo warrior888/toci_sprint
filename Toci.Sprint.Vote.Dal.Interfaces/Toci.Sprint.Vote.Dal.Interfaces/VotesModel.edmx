@@ -23,7 +23,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdFriendsVotes" Type="int" />
+          <Property Name="IdVoteUsers" Type="int" />
+          <Property Name="IdVoteUsersFriend" Type="int" />
+          <Property Name="IdCandidates" Type="int" />
+          <Property Name="AllowedToShow" Type="bit" />
         </EntityType>
         <EntityType Name="GeographicRegions">
           <Key>
@@ -103,7 +106,19 @@
           <Property Name="IdOccupations" Type="int" />
           <Property Name="IdGeographicRegions" Type="int" />
         </EntityType>
-        <Association Name="FK__FriendVot__IdFri__05D8E0BE">
+        <Association Name="FK__FriendVot__IdCan__681373AD">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
+          <End Role="FriendVotes" Type="Self.FriendVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendVotes">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FriendVot__IdVot__662B2B3B">
           <End Role="FriendVotes" Type="Self.FriendVotes" Multiplicity="0..1" />
           <End Role="FriendVotes1" Type="Self.FriendVotes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,11 +126,23 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="FriendVotes1">
-              <PropertyRef Name="IdFriendsVotes" />
+              <PropertyRef Name="IdVoteUsers" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Geographi__IdGeo__6C190EBB">
+        <Association Name="FK__FriendVot__IdVot__671F4F74">
+          <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
+          <End Role="FriendVotes" Type="Self.FriendVotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendVotes">
+              <PropertyRef Name="IdVoteUsersFriend" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Geographi__IdGeo__4C6B5938">
           <End Role="GeographicRegions" Type="Self.GeographicRegions" Multiplicity="0..1" />
           <End Role="GeographicRegions1" Type="Self.GeographicRegions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -127,7 +154,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Occupatio__IdOcc__6EF57B66">
+        <Association Name="FK__Occupatio__IdOcc__4F47C5E3">
           <End Role="Occupations" Type="Self.Occupations" Multiplicity="0..1" />
           <End Role="Occupations1" Type="Self.Occupations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -139,7 +166,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Translati__IdLan__75A278F5">
+        <Association Name="FK__Translati__IdLan__55F4C372">
           <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
           <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -151,7 +178,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Translati__IdPhr__76969D2E">
+        <Association Name="FK__Translati__IdPhr__56E8E7AB">
           <End Role="Phrases" Type="Self.Phrases" Multiplicity="0..1" />
           <End Role="Translations" Type="Self.Translations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -163,7 +190,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VotesForC__IdCan__02FC7413">
+        <Association Name="FK__VotesForC__IdCan__634EBE90">
           <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
           <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
           <ReferentialConstraint>
@@ -175,7 +202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VotesForC__IdVot__02084FDA">
+        <Association Name="FK__VotesForC__IdVot__625A9A57">
           <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="0..1" />
           <End Role="VotesForCandidates" Type="Self.VotesForCandidates" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,7 +214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VoteUsers__IdGeo__7B5B524B">
+        <Association Name="FK__VoteUsers__IdGeo__5BAD9CC8">
           <End Role="GeographicRegions" Type="Self.GeographicRegions" Multiplicity="0..1" />
           <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -199,7 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VoteUsers__IdLan__797309D9">
+        <Association Name="FK__VoteUsers__IdLan__59C55456">
           <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
           <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -211,7 +238,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VoteUsers__IdOcc__7A672E12">
+        <Association Name="FK__VoteUsers__IdOcc__5AB9788F">
           <End Role="Occupations" Type="Self.Occupations" Multiplicity="0..1" />
           <End Role="VoteUsers" Type="Self.VoteUsers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -235,43 +262,51 @@
           <EntitySet Name="Translations" EntityType="Self.Translations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VotesForCandidates" EntityType="Self.VotesForCandidates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VoteUsers" EntityType="Self.VoteUsers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__FriendVot__IdFri__05D8E0BE" Association="Self.FK__FriendVot__IdFri__05D8E0BE">
+          <AssociationSet Name="FK__FriendVot__IdCan__681373AD" Association="Self.FK__FriendVot__IdCan__681373AD">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="FriendVotes" EntitySet="FriendVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FriendVot__IdVot__662B2B3B" Association="Self.FK__FriendVot__IdVot__662B2B3B">
             <End Role="FriendVotes" EntitySet="FriendVotes" />
             <End Role="FriendVotes1" EntitySet="FriendVotes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Geographi__IdGeo__6C190EBB" Association="Self.FK__Geographi__IdGeo__6C190EBB">
+          <AssociationSet Name="FK__FriendVot__IdVot__671F4F74" Association="Self.FK__FriendVot__IdVot__671F4F74">
+            <End Role="VoteUsers" EntitySet="VoteUsers" />
+            <End Role="FriendVotes" EntitySet="FriendVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Geographi__IdGeo__4C6B5938" Association="Self.FK__Geographi__IdGeo__4C6B5938">
             <End Role="GeographicRegions" EntitySet="GeographicRegions" />
             <End Role="GeographicRegions1" EntitySet="GeographicRegions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Occupatio__IdOcc__6EF57B66" Association="Self.FK__Occupatio__IdOcc__6EF57B66">
+          <AssociationSet Name="FK__Occupatio__IdOcc__4F47C5E3" Association="Self.FK__Occupatio__IdOcc__4F47C5E3">
             <End Role="Occupations" EntitySet="Occupations" />
             <End Role="Occupations1" EntitySet="Occupations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Translati__IdLan__75A278F5" Association="Self.FK__Translati__IdLan__75A278F5">
+          <AssociationSet Name="FK__Translati__IdLan__55F4C372" Association="Self.FK__Translati__IdLan__55F4C372">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="Translations" EntitySet="Translations" />
           </AssociationSet>
-          <AssociationSet Name="FK__Translati__IdPhr__76969D2E" Association="Self.FK__Translati__IdPhr__76969D2E">
+          <AssociationSet Name="FK__Translati__IdPhr__56E8E7AB" Association="Self.FK__Translati__IdPhr__56E8E7AB">
             <End Role="Phrases" EntitySet="Phrases" />
             <End Role="Translations" EntitySet="Translations" />
           </AssociationSet>
-          <AssociationSet Name="FK__VotesForC__IdCan__02FC7413" Association="Self.FK__VotesForC__IdCan__02FC7413">
+          <AssociationSet Name="FK__VotesForC__IdCan__634EBE90" Association="Self.FK__VotesForC__IdCan__634EBE90">
             <End Role="Candidates" EntitySet="Candidates" />
             <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
           </AssociationSet>
-          <AssociationSet Name="FK__VotesForC__IdVot__02084FDA" Association="Self.FK__VotesForC__IdVot__02084FDA">
+          <AssociationSet Name="FK__VotesForC__IdVot__625A9A57" Association="Self.FK__VotesForC__IdVot__625A9A57">
             <End Role="VoteUsers" EntitySet="VoteUsers" />
             <End Role="VotesForCandidates" EntitySet="VotesForCandidates" />
           </AssociationSet>
-          <AssociationSet Name="FK__VoteUsers__IdGeo__7B5B524B" Association="Self.FK__VoteUsers__IdGeo__7B5B524B">
+          <AssociationSet Name="FK__VoteUsers__IdGeo__5BAD9CC8" Association="Self.FK__VoteUsers__IdGeo__5BAD9CC8">
             <End Role="GeographicRegions" EntitySet="GeographicRegions" />
             <End Role="VoteUsers" EntitySet="VoteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__VoteUsers__IdLan__797309D9" Association="Self.FK__VoteUsers__IdLan__797309D9">
+          <AssociationSet Name="FK__VoteUsers__IdLan__59C55456" Association="Self.FK__VoteUsers__IdLan__59C55456">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="VoteUsers" EntitySet="VoteUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__VoteUsers__IdOcc__7A672E12" Association="Self.FK__VoteUsers__IdOcc__7A672E12">
+          <AssociationSet Name="FK__VoteUsers__IdOcc__5AB9788F" Association="Self.FK__VoteUsers__IdOcc__5AB9788F">
             <End Role="Occupations" EntitySet="Occupations" />
             <End Role="VoteUsers" EntitySet="VoteUsers" />
           </AssociationSet>
@@ -286,6 +321,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="VotesForCandidates" Relationship="Self.FK__VotesForC__IdCan__30F848ED" FromRole="Candidates" ToRole="VotesForCandidates" />
+          <NavigationProperty Name="FriendVotes" Relationship="voteModel.FK__FriendVot__IdCan__681373AD" FromRole="Candidate" ToRole="FriendVote" />
         </EntityType>
         <EntityType Name="VotesForCandidate">
           <Key>
@@ -320,6 +356,7 @@
           <NavigationProperty Name="GeographicRegion" Relationship="voteModel.FK__VoteUsers__IdGeo__7B5B524B" FromRole="VoteUser" ToRole="GeographicRegion" />
           <NavigationProperty Name="Language" Relationship="voteModel.FK__VoteUsers__IdLan__797309D9" FromRole="VoteUser" ToRole="Language" />
           <NavigationProperty Name="Occupation" Relationship="voteModel.FK__VoteUsers__IdOcc__7A672E12" FromRole="VoteUser" ToRole="Occupation" />
+          <NavigationProperty Name="FriendVotes" Relationship="voteModel.FK__FriendVot__IdVot__671F4F74" FromRole="VoteUser" ToRole="FriendVote" />
         </EntityType>
         <Association Name="FK__VotesForC__IdCan__30F848ED">
           <End Role="Candidates" Type="Self.Candidate" Multiplicity="0..1" />
@@ -397,6 +434,18 @@
             <End Role="Phras" EntitySet="Phrases" />
             <End Role="Translation" EntitySet="Translations" />
           </AssociationSet>
+          <AssociationSet Name="FK__FriendVot__IdCan__681373AD" Association="voteModel.FK__FriendVot__IdCan__681373AD">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="FriendVote" EntitySet="FriendVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FriendVot__IdVot__662B2B3B" Association="voteModel.FK__FriendVot__IdVot__662B2B3B">
+            <End Role="FriendVote" EntitySet="FriendVotes" />
+            <End Role="FriendVote1" EntitySet="FriendVotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FriendVot__IdVot__671F4F74" Association="voteModel.FK__FriendVot__IdVot__671F4F74">
+            <End Role="VoteUser" EntitySet="VoteUsers" />
+            <End Role="FriendVote" EntitySet="FriendVotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ElectionKind">
           <Key>
@@ -413,6 +462,14 @@
           <Property Name="IdFriendsVotes" Type="Int32" />
           <NavigationProperty Name="FriendVotes1" Relationship="voteModel.FK__FriendVot__IdFri__05D8E0BE" FromRole="FriendVote" ToRole="FriendVote1" />
           <NavigationProperty Name="FriendVote1" Relationship="voteModel.FK__FriendVot__IdFri__05D8E0BE" FromRole="FriendVote1" ToRole="FriendVote" />
+          <Property Name="IdVoteUsers" Type="Int32" />
+          <Property Name="IdVoteUsersFriend" Type="Int32" />
+          <Property Name="IdCandidates" Type="Int32" />
+          <Property Name="AllowedToShow" Type="Boolean" />
+          <NavigationProperty Name="Candidate" Relationship="voteModel.FK__FriendVot__IdCan__681373AD" FromRole="FriendVote" ToRole="Candidate" />
+          <NavigationProperty Name="FriendVotes11" Relationship="voteModel.FK__FriendVot__IdVot__662B2B3B" FromRole="FriendVote" ToRole="FriendVote1" />
+          <NavigationProperty Name="FriendVote11" Relationship="voteModel.FK__FriendVot__IdVot__662B2B3B" FromRole="FriendVote1" ToRole="FriendVote" />
+          <NavigationProperty Name="VoteUser" Relationship="voteModel.FK__FriendVot__IdVot__671F4F74" FromRole="FriendVote" ToRole="VoteUser" />
         </EntityType>
         <EntityType Name="GeographicRegion">
           <Key>
@@ -571,6 +628,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__FriendVot__IdCan__681373AD">
+          <End Type="voteModel.Candidate" Role="Candidate" Multiplicity="0..1" />
+          <End Type="voteModel.FriendVote" Role="FriendVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendVote">
+              <PropertyRef Name="IdCandidates" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FriendVot__IdVot__662B2B3B">
+          <End Type="voteModel.FriendVote" Role="FriendVote" Multiplicity="0..1" />
+          <End Type="voteModel.FriendVote" Role="FriendVote1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FriendVote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendVote1">
+              <PropertyRef Name="IdVoteUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FriendVot__IdVot__671F4F74">
+          <End Type="voteModel.VoteUser" Role="VoteUser" Multiplicity="0..1" />
+          <End Type="voteModel.FriendVote" Role="FriendVote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendVote">
+              <PropertyRef Name="IdVoteUsersFriend" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -625,7 +718,10 @@
           <EntitySetMapping Name="FriendVotes">
             <EntityTypeMapping TypeName="voteModel.FriendVote">
               <MappingFragment StoreEntitySet="FriendVotes">
-                <ScalarProperty Name="IdFriendsVotes" ColumnName="IdFriendsVotes" />
+                <ScalarProperty Name="AllowedToShow" ColumnName="AllowedToShow" />
+                <ScalarProperty Name="IdCandidates" ColumnName="IdCandidates" />
+                <ScalarProperty Name="IdVoteUsersFriend" ColumnName="IdVoteUsersFriend" />
+                <ScalarProperty Name="IdVoteUsers" ColumnName="IdVoteUsers" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

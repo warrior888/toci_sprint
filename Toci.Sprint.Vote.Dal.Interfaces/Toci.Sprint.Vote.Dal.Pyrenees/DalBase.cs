@@ -6,32 +6,38 @@ using Toci.Db.Interfaces;
 
 namespace Toci.Sprint.Vote.Dal.Pyrenees
 {
-
-    public abstract class DalBase<TModel> : IGenericDbHandle<TModel>
+    
+    public class DalBase<TModel> : IGenericDbHandle<TModel> where TModel : class
     {
-       // protected Dictionary<DalBase, DalBase> DalMap; // = new Dictionary<string, DalBase>();
+        protected voteEntities DbContext = new voteEntities();
 
-     // ??
+         public virtual IQueryable<TModel> Select(Expression<Func<TModel, int, bool>> @where)
+         {
+             return DbContext.Set<TModel>().Where(@where);
+         }
 
+         public virtual TModel Insert(TModel model)
+         {
+             TModel inserted = DbContext.Set<TModel>().Add(model);
+             DbContext.SaveChanges();
 
-     public IQueryable<TModel> Select(Expression<Func<string, List<TModel>>> @where)
-     {
-         throw new NotImplementedException();
-     }
+             return inserted;
+         }
 
-     public TModel Insert(TModel model)
-     {
-         throw new NotImplementedException();
-     }
+         public virtual TModel Update(TModel model)
+         {
+             TModel updated = DbContext.Set<TModel>().Attach(model);
+             DbContext.SaveChanges();
 
-     public TModel Update(TModel model)
-     {
-         throw new NotImplementedException();
-     }
+             return updated;
+         }
 
-     public bool Delete(TModel model)
-     {
-         throw new NotImplementedException();
-     }
+         public virtual bool Delete(TModel model)
+         {
+             TModel deleted = DbContext.Set<TModel>().Remove(model);
+             DbContext.SaveChanges();
+
+             return deleted == null;
+         }
     }
 }

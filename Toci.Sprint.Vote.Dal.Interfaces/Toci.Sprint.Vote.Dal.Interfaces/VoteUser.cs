@@ -18,6 +18,7 @@ namespace Toci.Sprint.Vote.Dal.Interfaces
         public VoteUser()
         {
             this.VotesForCandidates = new HashSet<VotesForCandidate>();
+            this.FriendVotes = new HashSet<FriendVote>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace Toci.Sprint.Vote.Dal.Interfaces
         public virtual GeographicRegion GeographicRegion { get; set; }
         public virtual Language Language { get; set; }
         public virtual Occupation Occupation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FriendVote> FriendVotes { get; set; }
     }
 }

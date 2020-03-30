@@ -18,11 +18,14 @@ namespace Toci.Sprint.Vote.Dal.Interfaces
         public Candidate()
         {
             this.VotesForCandidates = new HashSet<VotesForCandidate>();
+            this.FriendVotes = new HashSet<FriendVote>();
         }
     
         public int Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VotesForCandidate> VotesForCandidates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FriendVote> FriendVotes { get; set; }
     }
 }
